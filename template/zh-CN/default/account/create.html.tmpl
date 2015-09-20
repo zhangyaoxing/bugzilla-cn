@@ -18,63 +18,63 @@
 [% END %]
 
 [% PROCESS global/header.html.tmpl
-           title = "建立一個新的 $terms.Bugzilla 帳號"
+           title = "建立一个新的 $terms.Bugzilla 账号"
 %]
 
 <p>
-  要建立一個[% terms.Bugzilla %]帳號，你只要輸入：<br>
+  要建立一个[% terms.Bugzilla %]账号，你只需要输入：<br>
 [% IF Param('emailsuffix') == '' %]
-  一個有效的電子郵件地址。
+  一个有效的电子邮件地址。
 [% ELSE %]
-  一個帳號名稱。此一帳號名稱後面加上 [% Param('emailsuffix') %] 時可以對應到你的電子郵件地址。
+  一个账号名称。此账号名称后面加上 [% Param('emailsuffix') %] 时可以对应到你的电子邮件地址。
 [% END %]
-  會寄一封用來建立帳號的認證信到此一電子郵件地址。
-  <br><b>在你收到電子郵件之前，你將無法登入。</b>
-  <br>如果沒有在合理的時間範圍內收到，你可以用電子郵件連絡此一  Bugzilla 的管理者： <a
+  会发送一封邮件到此邮件地址用于确认建立账号。
+  <br><b>在你收到电子邮件之前，你将无法登录。</b>
+  <br>如果没有在合理的时间范围内收到，你可以使用电子邮件联络此  Bugzilla 的管理者： <a
   href="mailto:[% Param("maintainer") %]">[% Param("maintainer") %]</a> 。
 </p>
 
 [% IF Param('allowemailchange') %]
 <p>
-  如果你已經有帳號了，並且想要改變你的
+  如果你已经拥有账号，并想要变更你的
   [% IF Param('emailsuffix') == '' %]
-    電子郵件地址，
+    电子邮件地址，
   [% ELSE %]
-    帳號，
+    账号，
   [% END %]
-  可以在登入後在「偏好設定」頁面變更。
+  你可以登录后在「偏好设定」页面变更。
 </p>
 [% END %]
 
 <p>
-  當需要回報一個新的 [% terms.bug %] ，或者對現有的 [% terms.bug %] 留下意見時，需要一個帳號。
-  當後續有需要更多資訊時，可以聯絡上你。
-  這也讓其他使用者可以清楚了解是誰對 [%terms.bug %] 做了改變或留下意見。
-  <b>注意：你的電子郵件地址將<em>不會</em>顯示給訪客。只有註冊使用者才能看見它。</b>
+  当需要报告一个新的 [% terms.bug %] ，或对现有的 [% terms.bug %] 留下意见时，需要有一个账号。
+  当后续有更多需要关注的信息时，可以联络上你。
+  这也让其他使用者可以清楚地了解是谁对 [%terms.bug %] 做了变更或留下意见。
+  <b>注意：你的电子邮件地址将<em>不会</em>显示给访客。只有注册使用者才会看见它。</b>
 </p>
 
 [% IF Param('createemailregexp') == '.*' && Param('emailsuffix') == '' %]
 <p>
-  <b>隱私權提醒：</b>
-  <br>[% terms.Bugzilla %] 是一個開放的 [% terms.bug %] 追蹤系統。
-  <br>在大多數 [% terms.bugs %] 的活動，包括電子郵件地址，都是可被註冊使用者瀏覽的。
-  <br>我們<b>建議</b>使用次要的電子郵件，或者使用免費的網路電子郵件服務（例如 Gmail、Yahoo、Hotmail 等等），以避免你的主要電子郵件收到垃圾郵件。
+  <b>隐私提醒：</b>
+  <br>[% terms.Bugzilla %] 是一个开放的 [% terms.bug %] 追踪系统。
+  <br>在大多数 [% terms.bugs %] 的活动，包括电子邮件地址，都是可被注册使用者浏览的。
+  <br>我们<b>建议</b>使用将要电子邮件，或使用免费的网络电子邮件服务（例如 Gmail、Yahoo、Hotmail 等等），以避免你的主要电子邮件收到垃圾邮件。
 </p>
 [% END %]
 
 <form id="account_creation_form" method="get" action="createaccount.cgi">
   <span class="label">
     [% IF Param('emailsuffix') %]
-      帳號：
+      账号：
     [% ELSE %]
-      電子郵件地址：
+      电子邮件：
     [% END %]
   </span>
   <input size="35" id="login" name="login" autofocus
          [%- ' type="email"' UNLESS Param('emailsuffix') %] required>
   [% Param('emailsuffix') FILTER html %]
   <input type="hidden" id="token" name="token" value="[% issue_hash_token(['create_account']) FILTER html %]">
-  <input type="submit" id="send" value="送出">
+  <input type="submit" id="send" value="发送">
 </form>
 
 [% PROCESS global/footer.html.tmpl %]
